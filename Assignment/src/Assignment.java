@@ -26,10 +26,9 @@
 			System.out.println("-------------");
 			
 			//overloading
-			phoneobj1.phoneType();
-			phoneobj2.phoneType(9000);
-			phoneobj3.phoneType("C3");
-			phoneobj1.phoneType(19000,"OnePlus");
+			phoneobj1.call("Rajesh");
+			phoneobj2.call("Ganesh",10);
+			phoneobj3.phoneType("Vijay","Are you there..?");
 			
 		}
 	}
@@ -85,21 +84,17 @@ class Phone {
    }
    //overloading
    
-   void phoneType()
+   void call(String recipient)
    {
-	 System.out.println("Enter the Phone Price and Model");   
+	 System.out.println("Calling "+recepient+".......");   
    }
-   void phoneType(int x,String modelType)
+   void call(String recipient,int duration)
    {
-	   System.out.println("The Phone is of Cost :"+x+"  The Model is "+modelType);
+	   System.out.println("Calling "+recipient+"for "+duration+"minutes ");
    }
-   void phoneType(int x)
+   void call(String recipient,String message)
    {
-	   System.out.println("The phone cost is :"+x);
-   }
-   void phoneType(String modelType)
-   {
-	   System.out.println("The Phone Model is :"+modelType);
+	   System.out.println("Sending message to "+recipient+" : "+message);
    }
 }
 
