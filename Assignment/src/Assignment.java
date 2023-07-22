@@ -28,7 +28,7 @@
 			//overloading
 			phoneobj1.call("Rajesh");
 			phoneobj2.call("Ganesh",10);
-			phoneobj3.phoneType("Vijay","Are you there..?");
+			phoneobj3.call("Vijay","Are you there..?");
 			
 		}
 	}
