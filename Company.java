@@ -72,7 +72,7 @@ public class Company {
 				empList.add(idCard3);
 				
 				
-				oos.writeObject(empList); //STORE THE ARRAY LIST 
+				oos.writeObject(empList); //STORE THE ARRAY LIST
 				
 				//System.out.println("Objects ARE serialized.....");
 				
@@ -87,14 +87,14 @@ public class Company {
 		  
 			try {
 				//1. Load the Driver
-				//stem.out.println("Trying to load the driver...");
+				//System.out.println("Trying to load the driver...");
 					DriverManager.registerDriver(new org.hsqldb.jdbc.JDBCDriver());
-				//stem.out.println("Driver loaded....");
+				//System.out.println("Driver loaded....");
 				
 				//2. Acquire the connection
-				//stem.out.println("Trying to connect....");
+				//System.out.println("Trying to connect....");
 				Connection conn = 	DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/xdb", "SA", "");
-				//stem.out.println("Connected : "+ conn);
+				//System.out.println("Connected : "+ conn);
 				
 				//3. make a desired statement (insert/update/delete/select)
 				
@@ -107,18 +107,18 @@ public class Company {
 				pst.setString(4,"Engnieer");
 				
 				
-				//stem.out.println("PreparedStatement is created : "+ pst);
+				//System.out.println("PreparedStatement is created : "+ pst);
 				
 				//4. execute that statement //  UR TABLENAME IS MYDEPT120
 				int rows = pst.executeUpdate();
 				
-				//stem.out.println("Rows created : "+rows);
+				//System.out.println("Rows created : "+rows);
 				
 				//6. close the statement, and connection
 				
 				pst.close();
 				conn.close();
-				//stem.out.println("Disconnected from the database....");
+				//System.out.println("Disconnected from the database....");
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
