@@ -1,5 +1,7 @@
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -31,9 +33,10 @@ public class Company {
 		empDetails3.setEmployeeName("Pushpendra");
 		empDetails3.setAddress("Raipur,Chattisgarh,521147");
 		empDetails3.setJobRole("Research and Development");
-		empDetails3.setMobileNumber("9754862178");
+		empDetails3.setMobileNumber("9754862178"); 
 		empDetails3.setSalary("25000");
 	    //empDetails3.printEmployeeDetails();
+		
 		
 		Organization orgObj=new Organization();
 		
@@ -56,6 +59,14 @@ public class Company {
 			EmployeeIdCard x = (EmployeeIdCard) empIterator.next();
 			x.start();
 		}
+		try {
+			idCard1.join();
+			idCard2.join();
+			idCard3.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//Storing the idCard objects data in file using Serialization
 		  try 
 		  {
@@ -65,14 +76,16 @@ public class Company {
 				ObjectOutputStream oos = new ObjectOutputStream(fout);
 				//System.out.println("Object output stream is ready....");
 				
-				ArrayList<EmployeeIdCard> empList = new ArrayList<EmployeeIdCard>();
+				//ArrayList<EmployeeIdCard> empList = new ArrayList<EmployeeIdCard>();
 				
-				empList.add(idCard1);
-				empList.add(idCard2);
-				empList.add(idCard3);
+				//empList.add(idCard1);
+				//empList.add(idCard2);
+				//empList.add(idCard3);
 				
-				
-				oos.writeObject(empList); //STORE THE ARRAY LIST
+				System.out.println("-----------Printing The Id Card Details from File----------");
+				oos.writeObject(idCard1); //STORE THE ARRAY LIST 
+				oos.writeObject(idCard2);
+				oos.writeObject(idCard3);
 				
 				//System.out.println("Objects ARE serialized.....");
 				
@@ -82,19 +95,39 @@ public class Company {
 		  } catch (IOException e) {
 				   e.printStackTrace();
 				  }
+		  //Reading out from the file
+		  try {
+			  
+	            FileInputStream fileIn = new FileInputStream("employee.txt");
+	            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+	 
+	            EmployeeIdCard pr1 = (EmployeeIdCard) objectIn.readObject();
+	            EmployeeIdCard pr2 = (EmployeeIdCard) objectIn.readObject();
+	            EmployeeIdCard pr3 = (EmployeeIdCard) objectIn.readObject();
+	            System.out.println(pr1.toString());
+	            System.out.println(pr2.toString());
+	            System.out.println(pr3.toString());
+	            
+	 
+	           //System.out.println("The Object has been read from the file");
+	            objectIn.close();
+	 
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	        }
 		  
-		  //JDBC created table name EMPLOYE120 for idCard Details Storin
+		  //JDBC created table name EMPLOYE120 for idCard Details Storing
 		  
 			try {
 				//1. Load the Driver
-				//System.out.println("Trying to load the driver...");
+				//stem.out.println("Trying to load the driver...");
 					DriverManager.registerDriver(new org.hsqldb.jdbc.JDBCDriver());
-				//System.out.println("Driver loaded....");
+				//stem.out.println("Driver loaded....");
 				
 				//2. Acquire the connection
-				//System.out.println("Trying to connect....");
+				//stem.out.println("Trying to connect....");
 				Connection conn = 	DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/xdb", "SA", "");
-				//System.out.println("Connected : "+ conn);
+				//stem.out.println("Connected : "+ conn);
 				
 				//3. make a desired statement (insert/update/delete/select)
 				
@@ -107,18 +140,18 @@ public class Company {
 				pst.setString(4,"Engnieer");
 				
 				
-				//System.out.println("PreparedStatement is created : "+ pst);
+				//stem.out.println("PreparedStatement is created : "+ pst);
 				
 				//4. execute that statement //  UR TABLENAME IS MYDEPT120
 				int rows = pst.executeUpdate();
 				
-				//System.out.println("Rows created : "+rows);
+				//stem.out.println("Rows created : "+rows);
 				
 				//6. close the statement, and connection
 				
 				pst.close();
 				conn.close();
-				//System.out.println("Disconnected from the database....");
+				//stem.out.println("Disconnected from the database....");
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
